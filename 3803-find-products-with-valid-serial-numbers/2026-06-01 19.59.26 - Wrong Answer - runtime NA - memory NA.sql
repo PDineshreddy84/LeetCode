@@ -1,0 +1,15 @@
+# Write your MySQL query statement below
+SELECT 
+    product_id
+    ,product_name
+    ,description
+FROM products
+WHERE REGEXP_LIKE(description,'(^|[^A-Za-z0-9])SN[0-9]{4}-[0-9]{4}([^0-9]|$)', 'c') 
+ORDER BY product_id
+# ^ inside [] means "not"
+# | → OR
+# $ → end of string
+# ^ →start of string
+# Use REGEXP BINARY so MySQL treats the pattern as case-sensitive:
+#REGEXP_LIKE(column, pattern, 'c')
+#'c' → makes regex case-sensitive

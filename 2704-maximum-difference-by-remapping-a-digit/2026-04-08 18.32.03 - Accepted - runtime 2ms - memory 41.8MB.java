@@ -1,0 +1,28 @@
+class Solution {
+    public int minMaxDifference(int num) {
+        String str=num+"";
+        char ch1[]=str.toCharArray();
+        char ch2[]=str.toCharArray();
+        int n=ch1.length;
+        char re1='$',re2=ch1[0];
+        for(int i=0;i<n;i++){
+            if(ch1[i]!='9'){
+                re1=ch1[i];
+                break;
+            }
+        }
+        for(int i=0;i<n;i++){
+            if(ch1[i]==re1){
+                ch1[i]='9';
+            }
+            if(ch2[i]==re2){
+                ch2[i]='0';
+            }
+        }
+        String max=new String(ch1);
+        String min=new String(ch2);
+        int ma=Integer.parseInt(max);
+        int mi=Integer.parseInt(min);
+        return ma-mi;
+    }
+}

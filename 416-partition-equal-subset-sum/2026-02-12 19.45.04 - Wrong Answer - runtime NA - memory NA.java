@@ -1,0 +1,28 @@
+class Solution {
+    public boolean canPartition(int[] nums) {
+        int n=nums.length;
+        int totalSum=0;
+        for(int i=0;i<n;i++)totalSum+=nums[i];
+        if(totalSum%2!=0)return false;
+        return solve(nums,n,totalSum/2);
+    }
+    public boolean solve(int nums[],int n,int k){
+        boolean prev[]=new boolean[k+1];
+        prev[0]=true;
+        prev[nums[0]]=true;
+        for(int ind=1;ind<n;ind++){
+            boolean curr[]=new boolean[k+1];
+            curr[0]=true;
+            for(int target=1;target<=k;target++){
+                boolean notTaken=prev[target];
+                boolean taken=false;
+                if(nums[ind]<=target){
+                    taken=prev[target-nums[ind]];
+                }
+                prev[target]=taken||notTaken;
+            }
+            curr=prev;
+        }
+        return prev[k];
+    }
+}
