@@ -1,7 +1,7 @@
 class Solution {
     public int longestSubarray(int[] nums) {
         int n=nums.length;
-        int r=0,l=0,cz=0,co=0,ml=0,sum=0;
+        int r=0,l=0,cz=0,co=0,ml=0;
         while(r<n){
             if(nums[r]==1){
                 co++;
@@ -9,7 +9,7 @@ class Solution {
             else{
                 cz++;
             }
-            while(cz>1){
+            if(cz>1){
                 if(l<n && nums[l]==0){
                     cz--;
                 }
