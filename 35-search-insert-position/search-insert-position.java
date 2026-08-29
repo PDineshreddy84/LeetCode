@@ -4,8 +4,7 @@ class Solution {
         int l=0,r=n-1;
         while(l<=r){
             int m=r+(l-r)/2;
-            if(nums[m]==target)return m;
-            else if(nums[m]<target){
+            if(nums[m]<target){
                 l=m+1;
             }
             else{
