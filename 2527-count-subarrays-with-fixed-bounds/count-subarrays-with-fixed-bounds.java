@@ -1,26 +1,23 @@
 class Solution {
-    public long countSubarrays(int[] nums, int minK, int maxK) {
-        long count = 0;
-        int left = 0;
-        Deque<Integer> dq_min = new ArrayDeque<>();
-        Deque<Integer> dq_max = new ArrayDeque<>();
-
-        for (int i = 0; i < nums.length; ++i) {
-            if (nums[i] < minK || nums[i] > maxK) {
-                dq_min.clear();
-                dq_max.clear();
-                left = i + 1;
-                continue;
+    public long countSubarrays(int[] nums, int mink, int maxk) {
+        int culI=-1;
+        int maxI=-1;
+        int minI=-1;
+        int n=nums.length;
+        long ans=0;
+        for(int i=0;i<n;i++){
+            if(nums[i]<mink || nums[i]>maxk){
+                culI=i;
             }
-            while (!dq_min.isEmpty() && nums[dq_min.peekLast()] >= nums[i]) dq_min.pollLast();
-            dq_min.offerLast(i);
-            while (!dq_max.isEmpty() && nums[dq_max.peekLast()] <= nums[i]) dq_max.pollLast();
-            dq_max.offerLast(i);
-            if (nums[dq_min.peekFirst()] == minK && nums[dq_max.peekFirst()] == maxK) {
-                int start = Math.min(dq_min.peekFirst(), dq_max.peekFirst());
-                count += (start - left + 1);
+            if(nums[i]==mink){
+                minI=i;
             }
+            if(nums[i]==maxk){
+                maxI=i;
+            }
+            long temp=Math.min(minI,maxI)-culI;
+            ans=ans+((temp<0)?0:temp);
         }
-        return count;
+        return ans;
     }
 }
